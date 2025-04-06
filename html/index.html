@@ -3,19 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Joy's Portfolio</title>
-  <link rel="icon" href="assets/crown.ico" type="image/x-icon">
+  <title>Joy's Live CV and Portfolio </title>
+  <link rel="icon" href="/assets/crown.png" type="image/png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <!-- Google Fonts: Jersey 10 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+
+  <style>
+    .navbar-nav.mx-auto {
+      display: flex !important;
+      justify-content: space-evenly;
+      width: 100%;
+      max-width: 900px; /* Optional: adjust width */
+      font-family: "Jersey 10", sans-serif;
+      font-size: 25px;
+      padding-top: 10px;
+    }    
+  </style>
 </head>
 <body>
   <!-- Navbar Section -->
   <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to right, #6a11cb, #2575fc);">
     <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="assets/crown.png" alt="Logo" height="40">
+      <a class="navbar-brand" href="landing.html">
+        <img src="/assets/crown.png" alt="Logo" height="60">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
@@ -29,23 +44,23 @@
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-1" href="https://github.com/yourusername" target="_blank">
-              <i class="bi bi-github"></i><span></span>
+            <a class="nav-link d-flex align-items-center gap-2" href="https://github.com/yourusername" target="_blank">
+              <i class="bi bi-github fs-4"></i><span></span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-1" href="mailto:you@example.com">
-              <i class="bi bi-envelope-fill"></i><span></span>
+            <a class="nav-link d-flex align-items-center gap-2" href="mailto:you@example.com">
+              <i class="bi bi-envelope-fill fs-4"></i><span></span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-1" href="https://linkedin.com/in/yourusername" target="_blank">
-              <i class="bi bi-linkedin"></i>
+            <a class="nav-link d-flex align-items-center gap-2" href="https://linkedin.com/in/yourusername" target="_blank">
+              <i class="bi bi-linkedin fs-4"></i>
             </a>
           </li>          
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-1" href="https://youtube.com/@yourchannel" target="_blank">
-              <i class="bi bi-youtube"></i><span></span>
+            <a class="nav-link d-flex align-items-center gap-2" href="https://youtube.com/@yourchannel" target="_blank">
+              <i class="bi bi-youtube fs-4"></i><span></span>
             </a>
           </li>
         </ul>
@@ -56,7 +71,7 @@
   <!-- Hero Section -->
   <header class="text-white text-center py-5" style="background: linear-gradient(to right, #6a11cb, #2575fc);">
     <div class="container">
-      <h1 class="display-4">Welcome to My Portfolio</h1>
+      <h1 class="jersey-10-regular">Welcome to My Portfolio</h1>
       <p class="lead">A showcase of my creative and technical work</p>
     </div>
   </header>
@@ -64,7 +79,7 @@
   <!-- About Section -->
   <section id="about" class="py-5">
     <div class="container rounded p-4" style="background: linear-gradient(to right, #e6ccff, #d1b3ff);">
-      <h2>About Me</h2>
+      <h2> Education & Experience </h2>
       <p>Hello! I'm Joy, a passionate professional working at the intersection of business and technology. I love building meaningful experiences and managing impactful projects.</p>
     </div>
   </section>

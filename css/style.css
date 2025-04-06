@@ -1,14 +1,24 @@
 /* General Styles */
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     background: linear-gradient(to bottom, #6a11cb, #8e54e9);
     color: #ffffff;
     margin: 0;
     padding: 0;
   }
   
-  h1, h2, h3, h4, h5 {
+  .jersey-10-regular {
+    font-family: "Jersey 10", sans-serif;
     font-weight: 600;
+    font-style: normal;
+  }  
+
+  h1, h2, h3, h4, h5 {
+    font-weight: 800;
+    font-family: "jersey-10", sans-serif;
+    text-transform: uppercase;
   }
   
   /* Navbar */
@@ -19,19 +29,24 @@ body {
     z-index: 1000;
     background: linear-gradient(to right, #6a11cb, #2575fc);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    justify-content: center;
     margin-right: 40px;
+    font-family: "Jersey 10", sans-serif;
   }
+  
+  
   
   body::before {
     content: '';
     display: block;
     height: 72px; /* Adjust to navbar height */
-  }
-  
+  }  
+
   .navbar-nav .nav-link {
     color: white !important;
     transition: color 0.3s;
     padding: 0.75rem 1.25rem;
+    padding-top: 5px;
   }
   
   .navbar-nav .nav-link:hover {
