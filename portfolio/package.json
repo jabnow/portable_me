@@ -1,14 +1,15 @@
 {
-  "name": "zapping-zenith",
+  "name": "academic-portfolio",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
+    "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^5.14.4"
+    "astro": "^4.0.0",
+    "jspdf": "^2.5.1"
   }
 }

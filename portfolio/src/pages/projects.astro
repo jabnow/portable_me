@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/navigation.astro';
+import Footer from '../components/footer.astro';
+import ProjectsGallery from '../components/projects_gallery.astro';
+---
+
+<Layout title="Projects - Academic Portfolio">
+  <Navigation />
+  <main class="projects-page">
+    <div class="container">
+      <div class="projects-header">
+        <h1 class="page-title">Research Projects</h1>
+        <p class="page-subtitle">
+          A collection of my research projects, publications, and collaborative work
+        </p>
+      </div>
+      <ProjectsGallery />
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .projects-page {
+    padding-top: 6rem;
+    min-height: 100vh;
+  }
+  
+  .projects-header {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+  }
+  
+  .page-title {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .page-subtitle {
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+</style>

@@ -1,0 +1,132 @@
+---
+const updates: { date: string; title: string; description: string; type: keyof typeof typeColors }[] = [
+  {
+    date: 'March 2024',
+    title: 'Paper Accepted at CHI 2024',
+    description: 'Our paper on adaptive learning interfaces has been accepted to CHI 2024!',
+    type: 'publication'
+  },
+  {
+    date: 'February 2024',
+    title: 'NSF Grant Awarded',
+    description: 'Received NSF grant for $500K to study accessible educational technology.',
+    type: 'award'
+  },
+  {
+    date: 'January 2024',
+    title: 'Keynote Speaker',
+    description: 'Invited to give keynote at the International Conference on Accessibility.',
+    type: 'talk'
+  },
+  {
+    date: 'December 2023',
+    title: 'New Course Launch',
+    description: 'Launching CS 450: Human-Computer Interaction in Spring 2024.',
+    type: 'teaching'
+  },
+  {
+    date: 'November 2023',
+    title: 'Best Paper Award',
+    description: 'Won Best Paper Award at ASSETS 2023 for our work on screen reader optimization.',
+    type: 'award'
+  }
+];
+
+const typeColors = {
+  publication: 'var(--color-primary)',
+  award: 'var(--color-accent)',
+  talk: 'var(--color-accent-secondary)',
+  teaching: '#a78bfa'
+};
+---
+
+<section class="updates section" id="updates">
+  <div class="container">
+    <h2 class="section-title">Recent Updates</h2>
+    <div class="updates-grid">
+      {updates.map(update => (
+        <article class="update-card">
+          <div class="update-header">
+            <span class="update-type" style={`background-color: ${typeColors[update.type]}`}>
+              {update.type}
+            </span>
+            <time class="update-date">{update.date}</time>
+          </div>
+          <h3 class="update-title">{update.title}</h3>
+          <p class="update-description">{update.description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .updates {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-xl);
+  }
+  
+  .section-title {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+  }
+  
+  .updates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+  }
+  
+  .update-card {
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    transition: all var(--transition-base);
+  }
+  
+  .update-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-primary);
+    box-shadow: 0 10px 30px rgba(96, 165, 250, 0.2);
+  }
+  
+  .update-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .update-type {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-background);
+    letter-spacing: 0.05em;
+  }
+  
+  .update-date {
+    font-size: 0.85rem;
+    color: var(--color-text-tertiary);
+  }
+  
+  .update-title {
+    font-size: 1.15rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text-primary);
+  }
+  
+  .update-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 768px) {
+    .updates-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

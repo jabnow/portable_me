@@ -1,0 +1,207 @@
+---
+const photos = [
+  { src: '/placeholder.svg?height=400&width=600', alt: 'Conference presentation' },
+  { src: '/placeholder.svg?height=400&width=600', alt: 'Research lab' },
+  { src: '/placeholder.svg?height=400&width=600', alt: 'Teaching' },
+  { src: '/placeholder.svg?height=400&width=600', alt: 'Research meeting' },
+  { src: '/placeholder.svg?height=400&width=600', alt: 'Award ceremony' }
+];
+---
+
+<section class="carousel-section section" id="photos">
+  <div class="container">
+    <h2 class="section-title">Highlights</h2>
+    <div class="carousel-container">
+      <div class="carousel-track">
+        {photos.map((photo, index) => (
+          <div class="carousel-slide" data-index={index}>
+            <img src={photo.src || "/placeholder.svg"} alt={photo.alt} class="carousel-image" />
+          </div>
+        ))}
+      </div>
+      <button class="carousel-btn carousel-btn-prev" aria-label="Previous photo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <button class="carousel-btn carousel-btn-next" aria-label="Next photo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+      <div class="carousel-indicators">
+        {photos.map((_, index) => (
+          <button class="indicator" data-index={index} aria-label={`Go to photo ${index + 1}`}></button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const track = document.querySelector('.carousel-track') as HTMLElement;
+  const slides = Array.from(document.querySelectorAll('.carousel-slide')) as HTMLElement[];
+  const prevBtn = document.querySelector('.carousel-btn-prev') as HTMLButtonElement;
+  const nextBtn = document.querySelector('.carousel-btn-next') as HTMLButtonElement;
+  const indicators = Array.from(document.querySelectorAll('.indicator')) as HTMLButtonElement[];
+  
+  let currentIndex = 0;
+  let autoplayInterval: number;
+  
+  function updateCarousel() {
+    const offset = -currentIndex * 100;
+    track.style.transform = `translateX(${offset}%)`;
+    
+    indicators.forEach((indicator, index) => {
+      indicator.classList.toggle('active', index === currentIndex);
+    });
+  }
+  
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateCarousel();
+  }
+  
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateCarousel();
+  }
+  
+  function goToSlide(index: number) {
+    currentIndex = index;
+    updateCarousel();
+  }
+  
+  function startAutoplay() {
+    autoplayInterval = window.setInterval(nextSlide, 5000);
+  }
+  
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+  }
+  
+  prevBtn.addEventListener('click', () => {
+    prevSlide();
+    stopAutoplay();
+    startAutoplay();
+  });
+  
+  nextBtn.addEventListener('click', () => {
+    nextSlide();
+    stopAutoplay();
+    startAutoplay();
+  });
+  
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+      goToSlide(index);
+      stopAutoplay();
+      startAutoplay();
+    });
+  });
+  
+  updateCarousel();
+  startAutoplay();
+</script>
+
+<style>
+  .carousel-section {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-3xl) 0;
+  }
+  
+  .section-title {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+  }
+  
+  .carousel-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+  }
+  
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .carousel-slide {
+    min-width: 100%;
+    aspect-ratio: 3/2;
+  }
+  
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(10, 14, 26, 0.8);
+    color: var(--color-text-primary);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+    z-index: 10;
+  }
+  
+  .carousel-btn:hover {
+    background-color: var(--color-primary);
+    transform: translateY(-50%) scale(1.1);
+  }
+  
+  .carousel-btn-prev {
+    left: var(--spacing-md);
+  }
+  
+  .carousel-btn-next {
+    right: var(--spacing-md);
+  }
+  
+  .carousel-indicators {
+    position: absolute;
+    bottom: var(--spacing-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: var(--spacing-sm);
+    z-index: 10;
+  }
+  
+  .indicator {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background-color: rgba(226, 232, 240, 0.4);
+    transition: all var(--transition-base);
+  }
+  
+  .indicator:hover {
+    background-color: rgba(226, 232, 240, 0.7);
+  }
+  
+  .indicator.active {
+    background-color: var(--color-primary);
+    width: 2rem;
+    border-radius: var(--radius-sm);
+  }
+  
+  @media (max-width: 768px) {
+    .carousel-btn {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+</style>

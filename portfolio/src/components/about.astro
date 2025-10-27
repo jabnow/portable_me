@@ -1,0 +1,128 @@
+---
+---
+
+<section class="about section" id="about">
+  <div class="container">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p class="about-paragraph">
+          I'm an Assistant Professor in the Department of Computer Science at University Name, 
+          where I lead the Human-Centered Computing Lab. My research sits at the intersection of 
+          human-computer interaction, accessibility, and machine learning.
+        </p>
+        <p class="about-paragraph">
+          Before joining University Name, I completed my Ph.D. at MIT, where I was advised by 
+          Professor John Doe. My dissertation focused on developing adaptive learning systems 
+          that personalize educational content based on individual learning patterns and accessibility needs.
+        </p>
+        <p class="about-paragraph">
+          I'm passionate about creating technology that empowers all learners, regardless of their 
+          abilities or backgrounds. My work has been published in top-tier venues including CHI, 
+          UIST, and ASSETS, and has been recognized with several awards including the Best Paper 
+          Award at CHI 2023.
+        </p>
+        
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-number">25+</div>
+            <div class="stat-label">Publications</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">5</div>
+            <div class="stat-label">Awards</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">PhD Students</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="about-image">
+        <img 
+          src="/placeholder.svg?height=500&width=400" 
+          alt="Profile photo"
+          class="profile-image"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background-color: var(--color-background);
+  }
+  
+  .section-title {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+  }
+  
+  .about-content {
+    display: flex;
+    gap: var(--spacing-3xl);
+    align-items: center;
+  }
+  
+  .about-text {
+    flex: 1;
+  }
+  
+  .about-paragraph {
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.05rem;
+  }
+  
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-2xl);
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .stat {
+    text-align: center;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .stat-label {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+  }
+  
+  .about-image {
+    flex: 0 0 350px;
+  }
+  
+  .profile-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  }
+  
+  @media (max-width: 968px) {
+    .about-content {
+      flex-direction: column-reverse;
+    }
+    
+    .about-image {
+      flex: 0 0 auto;
+      max-width: 300px;
+    }
+    
+    .about-stats {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
