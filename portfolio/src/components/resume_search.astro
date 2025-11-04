@@ -2,62 +2,62 @@
 const experiences = [
   {
     id: 1,
-    title: 'Assistant Professor',
-    organization: 'University Name',
-    location: 'City, State',
-    startDate: '2022',
-    endDate: 'Present',
-    description: 'Leading the Human-Centered Computing Lab, teaching graduate and undergraduate courses, and conducting research in HCI and accessibility.',
+    title: 'Management Intern',
+    organization: 'Amazon',
+    location: 'ACY1, NJ',
+    startDate: 'May 2025',
+    endDate: 'Jul 2025',
+    description: 'Built real time financial ops dashboard tracking production throughput and downtime; proposed physical prototype projected $500 K + annual savings to site leadership. Conducted 150-200 associate trainings during Prime Week new tech rollout.',
     tags: ['teaching', 'research', 'leadership'],
-    type: 'academic'
+    type: 'work'
   },
   {
     id: 2,
-    title: 'Postdoctoral Researcher',
-    organization: 'MIT CSAIL',
-    location: 'Cambridge, MA',
-    startDate: '2020',
-    endDate: '2022',
-    description: 'Conducted research on adaptive learning systems and published 8 papers in top-tier venues.',
+    title: 'People Analytics Researcher',
+    organization: 'Industrial/Organizational Psychology Dept, NYU',
+    location: 'NYC, NY',
+    startDate: 'Dec 2024',
+    endDate: 'May 2025',
+    description: 'Analyzed LLM-based job-market data sets to quantify human-capital risk and economic mobility trends, increased mastery of new analysis techniques.',
     tags: ['research', 'machine-learning', 'education'],
     type: 'research'
   },
   {
     id: 3,
-    title: 'Research Intern',
-    organization: 'Microsoft Research',
-    location: 'Redmond, WA',
-    startDate: '2019',
-    endDate: '2019',
-    description: 'Developed accessible UI components for Microsoft Office suite, improving screen reader compatibility.',
+    title: 'Data Engineer',
+    organization: 'DTCC: Fintech AI Initiative, NYU',
+    location: 'NYC, NY',
+    startDate: 'Sep 2024',
+    endDate: 'May 2025',
+    description: 'Applied machine learning/NLP to model market sentiment and price volatility across financial markets. Co-developed quant dashboards linking liquidity signals to short-term risk spreads with AI-driven credit-risk forecasting.',
     tags: ['industry', 'accessibility', 'development'],
-    type: 'industry'
+    type: 'research'
   },
   {
     id: 4,
-    title: 'PhD in Computer Science',
-    organization: 'MIT',
-    location: 'Cambridge, MA',
-    startDate: '2015',
-    endDate: '2020',
-    description: 'Dissertation: "Adaptive Learning Interfaces for Diverse Learners". Advised by Prof. John Doe.',
-    tags: ['education', 'research', 'machine-learning'],
+    title: 'Business and Finance Lead Tutor',
+    organization: 'Peer Tutoring Center, NYU',
+    location: 'NYC, NY',
+    startDate: 'Jan 2024',
+    endDate: 'May 2025',
+    description: 'Tutored 50+ students in Accounting, Managerial Economics, and Corporate Finance with case exercises.',
+    tags: ['education', 'problem-solving', 'management'],
     type: 'education'
   },
   {
     id: 5,
-    title: 'Teaching Assistant',
+    title: 'Project Manager',
     organization: 'MIT',
     location: 'Cambridge, MA',
     startDate: '2016',
     endDate: '2019',
     description: 'TA for Human-Computer Interaction, User Interface Design, and Machine Learning courses.',
     tags: ['teaching', 'education'],
-    type: 'teaching'
+    type: 'work'
   },
   {
     id: 6,
-    title: 'Research Assistant',
+    title: 'Founder',
     organization: 'Stanford HCI Group',
     location: 'Stanford, CA',
     startDate: '2013',
@@ -68,34 +68,34 @@ const experiences = [
   },
   {
     id: 7,
-    title: 'MSc in Computer Science',
-    organization: 'Stanford University',
-    location: 'Stanford, CA',
-    startDate: '2013',
-    endDate: '2015',
-    description: 'Focus on Human-Computer Interaction and Artificial Intelligence.',
-    tags: ['education', 'hci'],
+    title: 'Minor in Computer Science',
+    organization: 'NYU',
+    location: 'NYC, NY',
+    startDate: '2024',
+    endDate: '2026',
+    description: 'DSA (Python), OOP (C++), Databases (SQL), Computer Networking, Graduate Offensive Security.',
+    tags: ['education', 'software'],
     type: 'education'
   },
   {
     id: 8,
-    title: 'Software Engineer Intern',
-    organization: 'Google',
-    location: 'Mountain View, CA',
-    startDate: '2014',
-    endDate: '2014',
-    description: 'Developed features for Google Classroom focusing on accessibility and internationalization.',
-    tags: ['industry', 'development', 'accessibility'],
-    type: 'industry'
+    title: 'Minor in Mathematics',
+    organization: 'NYU',
+    location: 'NYC, NY',
+    startDate: '2023',
+    endDate: '2024',
+    description: 'Calculus II, Linear Algebra & Differential Equations, Discrete Mathematics, Applied Statistics & Probability',
+    tags: ['education', 'courses', 'applied math'],
+    type: 'education'
   },
   {
     id: 9,
-    title: 'BSc in Computer Science',
-    organization: 'UC Berkeley',
-    location: 'Berkeley, CA',
-    startDate: '2009',
-    endDate: '2013',
-    description: 'Graduated with Honors. Focus on Software Engineering and Human-Computer Interaction.',
+    title: 'BSc in Business and Technology Management',
+    organization: 'New York University',
+    location: 'NYC, NY',
+    startDate: 'Sept 2023',
+    endDate: 'May 2026',
+    description: 'Concentration in Innovation & Strategy. Dean\'s List. Early graduation with honors from Tandon School of Engineering.',
     tags: ['education'],
     type: 'education'
   }
@@ -661,7 +661,7 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
     letter-spacing: 0.05em;
   }
   
-  .experience-type-badge[data-type="academic"] {
+  .experience-type-badge[data-type="courses"] {
     background-color: var(--color-primary);
     color: var(--color-background);
   }
@@ -671,7 +671,7 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
     color: var(--color-background);
   }
   
-  .experience-type-badge[data-type="industry"] {
+  .experience-type-badge[data-type="projects"] {
     background-color: var(--color-accent-secondary);
     color: var(--color-background);
   }
@@ -681,7 +681,12 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
     color: var(--color-background);
   }
   
-  .experience-type-badge[data-type="teaching"] {
+  .experience-type-badge[data-type="awards"] {
+    background-color: #f472b6;
+    color: var(--color-background);
+  }
+
+  .experience-type-badge[data-type="work"] {
     background-color: #f472b6;
     color: var(--color-background);
   }
