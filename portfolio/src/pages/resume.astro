@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/navigation.astro';
+import Footer from '../components/footer.astro';
+import ResumeSearch from '../components/resume_search.astro';
+---
+
+<Layout title="Resume - Academic Portfolio">
+  <Navigation />
+  <main class="resume-page">
+    <div class="container">
+      <div class="resume-header">
+        <h1 class="page-title">Resume</h1>
+        <p class="page-subtitle">
+          Explore my academic journey, research experience, and professional accomplishments
+        </p>
+      </div>
+      <ResumeSearch />
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .resume-page {
+    padding-top: 6rem;
+    min-height: 100vh;
+  }
+  
+  .resume-header {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+  }
+  
+  .page-title {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .page-subtitle {
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+</style>

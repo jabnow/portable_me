@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/navigation.astro';
+import Footer from '../components/footer.astro';
+import Hero from '../components/hero.astro';
+import PhotoCarousel from '../components/photo_carousel.astro';
+import About from '../components/about.astro';
+import Updates from '../components/blog.astro';
+import Contact from '../components/contact.astro';
+---
+
+<Layout title="Academic Portfolio - Home">
+  <Navigation />
+  <main>
+    <Hero />
+    <PhotoCarousel />
+    <About />
+    <Updates />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>
