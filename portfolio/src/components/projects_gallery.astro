@@ -1,111 +1,153 @@
 ---
-const projects = [
-  {
-    id: 1,
-    title: 'Adaptive Learning Interfaces',
-    description: 'Machine learning-powered system that personalizes educational content based on individual learning patterns and accessibility needs.',
-    image: '/placeholder.svg?height=400&width=600',
-    year: '2023',
-    status: 'ongoing',
-    tags: ['Machine Learning', 'Education', 'Accessibility'],
-    publications: 3,
-    link: '#'
-  },
-  {
-    id: 2,
-    title: 'Screen Reader Optimization',
-    description: 'Novel techniques for improving screen reader performance and user experience in complex web applications.',
-    image: '/placeholder.svg?height=400&width=600',
-    year: '2023',
-    status: 'completed',
-    tags: ['Accessibility', 'Web', 'HCI'],
-    publications: 2,
-    link: '#'
-  },
-  {
-    id: 3,
-    title: 'Gesture-Based Learning',
-    description: 'Exploring multimodal interaction techniques for educational applications using gesture recognition and haptic feedback.',
-    image: '/placeholder.svg?height=400&width=600',
-    year: '2022',
-    status: 'completed',
-    tags: ['HCI', 'Education', 'Mobile'],
-    publications: 4,
-    link: '#'
-  },
-  {
-    id: 4,
-    title: 'Inclusive Design Toolkit',
-    description: 'Open-source toolkit for designers and developers to create more accessible and inclusive digital experiences.',
-    image: '/placeholder.svg?height=400&width=600',
-    year: '2022',
-    status: 'ongoing',
-    tags: ['Accessibility', 'Design', 'Open Source'],
-    publications: 1,
-    link: '#'
-  },
-  {
-    id: 5,
-    title: 'AI-Powered Tutoring System',
-    description: 'Intelligent tutoring system that adapts to student needs and provides personalized feedback in real-time.',
-    image: '/placeholder.svg?height=400&width=600',
-    year: '2021',
-    status: 'completed',
-    tags: ['AI', 'Education', 'Machine Learning'],
-    publications: 5,
-    link: '#'
-  },
-  {
-    id: 6,
-    title: 'Voice Interface for Education',
-    description: 'Designing and evaluating voice-based interfaces for educational applications to support diverse learners.',
-    image: '/placeholder.svg?height=400&width=600',
-    year: '2021',
-    status: 'completed',
-    tags: ['Voice UI', 'Education', 'Accessibility'],
-    publications: 2,
-    link: '#'
-  },
-  {
-    id: 7,
-    title: 'Collaborative Learning Spaces',
-    description: 'Virtual reality environments designed to facilitate collaborative learning and remote education.',
-    image: '/placeholder.svg?height=400&width=600',
-    year: '2020',
-    status: 'completed',
-    tags: ['VR', 'Education', 'Collaboration'],
-    publications: 3,
-    link: '#'
-  },
-  {
-    id: 8,
-    title: 'Accessible Data Visualization',
-    description: 'Creating data visualizations that are accessible to users with visual impairments through sonification and haptics.',
-    image: '/placeholder.svg?height=400&width=600',
-    year: '2020',
-    status: 'completed',
-    tags: ['Accessibility', 'Data Viz', 'HCI'],
-    publications: 2,
-    link: '#'
-  },
-  {
-    id: 9,
-    title: 'Mobile Learning Analytics',
-    description: 'Analytics platform for tracking and improving student engagement in mobile learning environments.',
-    image: '/placeholder.svg?height=400&width=600',
-    year: '2019',
-    status: 'completed',
-    tags: ['Mobile', 'Education', 'Analytics'],
-    publications: 1,
-    link: '#'
+import { readFileSync } from 'fs';
+import { join } from 'path';
+import { existsSync } from 'fs';
+
+// Read and parse projects from project.txt
+function parseProjectFile(): Array<{
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  year: string;
+  status: string;
+  tags: string[];
+  publications: number;
+  link: string;
+}> {
+  // Try multiple possible paths (works in both dev and build)
+  const projectRoot = process.cwd();
+  const possiblePaths = [
+    join(projectRoot, 'src', 'description', 'project.txt'),
+    join(projectRoot, '..', 'src', 'description', 'project.txt'),
+  ];
+  
+  let projectPath = possiblePaths.find(path => existsSync(path));
+  if (!projectPath) {
+    // Fallback: assume we're in project root
+    projectPath = join(projectRoot, 'src', 'description', 'project.txt');
   }
-];
+  
+  const projectContent = readFileSync(projectPath, 'utf-8');
+  
+  const projects: Array<{
+    id: number;
+    title: string;
+    description: string;
+    image: string;
+    year: string;
+    status: string;
+    tags: string[];
+    publications: number;
+    link: string;
+  }> = [];
+  
+  // Split by project separator (regex matches "=== Project N ===" at start of line)
+  const parts = projectContent.split(/^=== Project \d+ ===$/m);
+  
+  // Skip the first part (header/comments) and process each project block
+  for (let i = 1; i < parts.length; i++) {
+    const block = parts[i].trim();
+    if (!block) continue;
+    
+    const lines = block.split('\n');
+    const project: {
+      id: number;
+      title: string;
+      description: string;
+      image: string;
+      year: string;
+      status: string;
+      tags: string[];
+      publications: number;
+      link: string;
+    } = {
+      id: i,
+      title: '',
+      description: '',
+      image: '',
+      year: '',
+      status: '',
+      tags: [],
+      publications: 0,
+      link: '#'
+    };
+    
+    let descriptionLines: string[] = [];
+    let inDescription = false;
+    
+    for (const line of lines) {
+      const trimmedLine = line.trim();
+      
+      // Skip empty lines and comments
+      if (!trimmedLine || trimmedLine.startsWith('#')) {
+        continue;
+      }
+      
+      // Check if this is a field label
+      if (trimmedLine.startsWith('Title:')) {
+        inDescription = false;
+        project.title = trimmedLine.substring(6).trim();
+      } else if (trimmedLine.startsWith('Description:')) {
+        inDescription = true;
+        // Description might be on the same line or following lines
+        const descText = trimmedLine.substring(12).trim();
+        if (descText) {
+          descriptionLines.push(descText);
+        }
+      } else if (trimmedLine.startsWith('Image:')) {
+        inDescription = false;
+        project.image = trimmedLine.substring(6).trim();
+      } else if (trimmedLine.startsWith('Year:')) {
+        inDescription = false;
+        project.year = trimmedLine.substring(5).trim();
+      } else if (trimmedLine.startsWith('Status:')) {
+        inDescription = false;
+        project.status = trimmedLine.substring(7).trim();
+      } else if (trimmedLine.startsWith('Tags:')) {
+        inDescription = false;
+        const tagsStr = trimmedLine.substring(5).trim();
+        project.tags = tagsStr.split(',').map(tag => tag.trim()).filter(tag => tag);
+      } else if (trimmedLine.startsWith('Publications:')) {
+        inDescription = false;
+        const pubsStr = trimmedLine.substring(13).trim();
+        project.publications = parseInt(pubsStr) || 0;
+      } else if (trimmedLine.startsWith('Link:')) {
+        inDescription = false;
+        project.link = trimmedLine.substring(5).trim();
+      } else if (inDescription && trimmedLine) {
+        // Collect description lines (can be multiple lines)
+        descriptionLines.push(trimmedLine);
+      }
+    }
+    
+    // Join description lines with spaces
+    project.description = descriptionLines.join(' ').trim();
+    
+    // Only add if we have at least a title
+    if (project.title) {
+      projects.push(project);
+    }
+  }
+  
+  return projects;
+}
+
+const projects = parseProjectFile();
+
+// Sort projects by year (most recent first)
+const sortedProjects = [...projects].sort((a, b) => {
+  const yearA = parseInt(a.year);
+  const yearB = parseInt(b.year);
+  return yearB - yearA;
+});
+
 ---
 
 <div class="projects-gallery">
   <div class="gallery-grid">
-    {projects.map(project => (
-      <article class="project-card">
+    {sortedProjects.map(project => (
+      <article class="project-card" id={`project-${project.id}`}>
         <a href={project.link} class="project-link">
           <div class="project-image-container">
             <img 
@@ -141,7 +183,7 @@ const projects = [
                   <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
                   <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
                 </svg>
-                {project.publications} {project.publications === 1 ? 'paper' : 'papers'}
+                {project.publications} {project.publications === 1 ? 'publications' : 'publications'}
               </div>
             </div>
           </div>

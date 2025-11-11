@@ -1,108 +1,212 @@
 ---
-const experiences = [
-  {
-    id: 1,
-    title: 'Management Intern',
-    organization: 'Amazon',
-    location: 'ACY1, NJ',
-    startDate: 'May 2025',
-    endDate: 'Jul 2025',
-    description: 'Built real time financial ops dashboard tracking production throughput and downtime; proposed physical prototype projected $500 K + annual savings to site leadership. Conducted 150-200 associate trainings during Prime Week new tech rollout.',
-    tags: ['teaching', 'research', 'leadership'],
-    type: 'work'
-  },
-  {
-    id: 2,
-    title: 'People Analytics Researcher',
-    organization: 'Industrial/Organizational Psychology Dept, NYU',
-    location: 'NYC, NY',
-    startDate: 'Dec 2024',
-    endDate: 'May 2025',
-    description: 'Analyzed LLM-based job-market data sets to quantify human-capital risk and economic mobility trends, increased mastery of new analysis techniques.',
-    tags: ['research', 'machine-learning', 'education'],
-    type: 'research'
-  },
-  {
-    id: 3,
-    title: 'Data Engineer',
-    organization: 'DTCC: Fintech AI Initiative, NYU',
-    location: 'NYC, NY',
-    startDate: 'Sep 2024',
-    endDate: 'May 2025',
-    description: 'Applied machine learning/NLP to model market sentiment and price volatility across financial markets. Co-developed quant dashboards linking liquidity signals to short-term risk spreads with AI-driven credit-risk forecasting.',
-    tags: ['industry', 'accessibility', 'development'],
-    type: 'research'
-  },
-  {
-    id: 4,
-    title: 'Business and Finance Lead Tutor',
-    organization: 'Peer Tutoring Center, NYU',
-    location: 'NYC, NY',
-    startDate: 'Jan 2024',
-    endDate: 'May 2025',
-    description: 'Tutored 50+ students in Accounting, Managerial Economics, and Corporate Finance with case exercises.',
-    tags: ['education', 'problem-solving', 'management'],
-    type: 'education'
-  },
-  {
-    id: 5,
-    title: 'Project Manager',
-    organization: 'MIT',
-    location: 'Cambridge, MA',
-    startDate: '2016',
-    endDate: '2019',
-    description: 'TA for Human-Computer Interaction, User Interface Design, and Machine Learning courses.',
-    tags: ['teaching', 'education'],
-    type: 'work'
-  },
-  {
-    id: 6,
-    title: 'Founder',
-    organization: 'Stanford HCI Group',
-    location: 'Stanford, CA',
-    startDate: '2013',
-    endDate: '2015',
-    description: 'Worked on projects related to mobile accessibility and gesture-based interfaces.',
-    tags: ['research', 'accessibility', 'mobile'],
-    type: 'research'
-  },
-  {
-    id: 7,
-    title: 'Minor in Computer Science',
-    organization: 'NYU',
-    location: 'NYC, NY',
-    startDate: '2024',
-    endDate: '2026',
-    description: 'DSA (Python), OOP (C++), Databases (SQL), Computer Networking, Graduate Offensive Security.',
-    tags: ['education', 'software'],
-    type: 'education'
-  },
-  {
-    id: 8,
-    title: 'Minor in Mathematics',
-    organization: 'NYU',
-    location: 'NYC, NY',
-    startDate: '2023',
-    endDate: '2024',
-    description: 'Calculus II, Linear Algebra & Differential Equations, Discrete Mathematics, Applied Statistics & Probability',
-    tags: ['education', 'courses', 'applied math'],
-    type: 'education'
-  },
-  {
-    id: 9,
-    title: 'BSc in Business and Technology Management',
-    organization: 'New York University',
-    location: 'NYC, NY',
-    startDate: 'Sept 2023',
-    endDate: 'May 2026',
-    description: 'Concentration in Innovation & Strategy. Dean\'s List. Early graduation with honors from Tandon School of Engineering.',
-    tags: ['education'],
-    type: 'education'
-  }
-];
+import { readFileSync } from 'fs';
+import { join } from 'path';
+import { existsSync } from 'fs';
 
-const allTags = [...new Set(experiences.flatMap(exp => exp.tags))].sort();
-const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
+// Read and parse resume experiences from resume.txt
+function parseResumeFile(): Array<{
+  id: number;
+  title: string;
+  organization: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  tags: string[];
+  type: string;
+  projectLink?: string;
+}> {
+  // Try multiple possible paths (works in both dev and build)
+  const projectRoot = process.cwd();
+  const possiblePaths = [
+    join(projectRoot, 'src', 'description', 'resume.txt'),
+    join(projectRoot, '..', 'src', 'description', 'resume.txt'),
+  ];
+  
+  let resumePath = possiblePaths.find(path => existsSync(path));
+  if (!resumePath) {
+    // Fallback: assume we're in project root
+    resumePath = join(projectRoot, 'src', 'description', 'resume.txt');
+  }
+  
+  const resumeContent = readFileSync(resumePath, 'utf-8');
+  
+  const experiences: Array<{
+    id: number;
+    title: string;
+    organization: string;
+    location: string;
+    startDate: string;
+    endDate: string;
+    description: string;
+    tags: string[];
+    type: string;
+    projectLink?: string;
+  }> = [];
+  
+  // Split by experience separator (regex matches "=== Experience N ===" at start of line)
+  const parts = resumeContent.split(/^=== Experience \d+ ===$/m);
+  
+  // Skip the first part (header/comments) and process each experience block
+  for (let i = 1; i < parts.length; i++) {
+    const block = parts[i].trim();
+    if (!block) continue;
+    
+    const lines = block.split('\n');
+    const experience: {
+      id: number;
+      title: string;
+      organization: string;
+      location: string;
+      startDate: string;
+      endDate: string;
+      description: string;
+      tags: string[];
+      type: string;
+      projectLink?: string;
+    } = {
+      id: i,
+      title: '',
+      organization: '',
+      location: '',
+      startDate: '',
+      endDate: '',
+      description: '',
+      tags: [],
+      type: '',
+      projectLink: undefined
+    };
+    
+    let descriptionLines: string[] = [];
+    let inDescription = false;
+    
+    for (const line of lines) {
+      const trimmedLine = line.trim();
+      
+      // Skip empty lines and comments
+      if (!trimmedLine || trimmedLine.startsWith('#')) {
+        continue;
+      }
+      
+      // Check if this is a field label
+      if (trimmedLine.startsWith('Title:')) {
+        inDescription = false;
+        experience.title = trimmedLine.substring(6).trim();
+      } else if (trimmedLine.startsWith('Organization:')) {
+        inDescription = false;
+        experience.organization = trimmedLine.substring(13).trim();
+      } else if (trimmedLine.startsWith('Location:')) {
+        inDescription = false;
+        experience.location = trimmedLine.substring(9).trim();
+      } else if (trimmedLine.startsWith('Start Date:')) {
+        inDescription = false;
+        experience.startDate = trimmedLine.substring(11).trim();
+      } else if (trimmedLine.startsWith('End Date:')) {
+        inDescription = false;
+        experience.endDate = trimmedLine.substring(9).trim();
+      } else if (trimmedLine.startsWith('Type:')) {
+        inDescription = false;
+        experience.type = trimmedLine.substring(5).trim();
+      } else if (trimmedLine.startsWith('Tags:')) {
+        inDescription = false;
+        const tagsStr = trimmedLine.substring(5).trim();
+        experience.tags = tagsStr.split(',').map(tag => tag.trim()).filter(tag => tag);
+      } else if (trimmedLine.startsWith('Project Link:')) {
+        inDescription = false;
+        experience.projectLink = trimmedLine.substring(13).trim();
+      } else if (trimmedLine.startsWith('Description:')) {
+        inDescription = true;
+        // Description might be on the same line or following lines
+        const descText = trimmedLine.substring(12).trim();
+        if (descText) {
+          descriptionLines.push(descText);
+        }
+      } else if (inDescription && trimmedLine) {
+        // Collect description lines (can be multiple lines)
+        descriptionLines.push(trimmedLine);
+      }
+    }
+    
+    // Join description lines with spaces
+    experience.description = descriptionLines.join(' ').trim();
+    
+    // Only add if we have at least a title
+    if (experience.title) {
+      experiences.push(experience);
+    }
+  }
+  
+  return experiences;
+}
+
+const experiences = parseResumeFile();
+
+// Function to parse date strings and convert to comparable format
+function parseDate(dateStr: string): number {
+  if (!dateStr) return 0;
+  
+  const trimmed = dateStr.trim();
+  
+  // Handle month + year format (e.g., "May 2025", "Dec 2024", "Sept 2023")
+  const monthNames: { [key: string]: number } = {
+    'jan': 1, 'january': 1,
+    'feb': 2, 'february': 2,
+    'mar': 3, 'march': 3,
+    'apr': 4, 'april': 4,
+    'may': 5,
+    'jun': 6, 'june': 6,
+    'jul': 7, 'july': 7,
+    'aug': 8, 'august': 8,
+    'sep': 9, 'sept': 9, 'september': 9,
+    'oct': 10, 'october': 10,
+    'nov': 11, 'november': 11,
+    'dec': 12, 'december': 12
+  };
+  
+  const parts = trimmed.toLowerCase().split(/\s+/);
+  if (parts.length >= 2) {
+    const month = monthNames[parts[0]];
+    const year = parseInt(parts[1]);
+    if (month && year) {
+      // Return year * 100 + month for proper sorting (e.g., 202505 for May 2025)
+      return year * 100 + month;
+    }
+  }
+  
+  // Handle year-only format (e.g., "2016", "2024")
+  // Treat as December of that year for sorting (so it comes after earlier months)
+  if (/^\d{4}$/.test(trimmed)) {
+    const year = parseInt(trimmed);
+    return year * 100 + 12; // December
+  }
+  
+  // Fallback: try to extract year and treat as December
+  const yearMatch = trimmed.match(/\d{4}/);
+  if (yearMatch) {
+    const year = parseInt(yearMatch[0]);
+    return year * 100 + 12; // December
+  }
+  
+  return 0;
+}
+
+// Sort experiences by endDate (most recent first), then by startDate if endDate is the same
+const sortedExperiences = [...experiences].sort((a, b) => {
+  const aEndDate = parseDate(a.endDate);
+  const bEndDate = parseDate(b.endDate);
+  
+  // If end dates are the same, sort by start date (most recent first)
+  if (aEndDate === bEndDate) {
+    const aStartDate = parseDate(a.startDate);
+    const bStartDate = parseDate(b.startDate);
+    return bStartDate - aStartDate;
+  }
+  
+  return bEndDate - aEndDate;
+});
+
+const allTags = [...new Set(sortedExperiences.flatMap(exp => exp.tags))].sort();
+const allTypes = [...new Set(sortedExperiences.map(exp => exp.type))].sort();
 ---
 
 <div class="resume-search">
@@ -121,14 +225,21 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
     </div>
     
     <div class="filters">
-      <div class="filter-group">
+      <div class="filter-group type-filter-group">  
         <label class="filter-label">Type:</label>
-        <select id="typeFilter" class="filter-select">
-          <option value="">All Types</option>
+        <div class="type-checkboxes" id="typeCheckboxes">
           {allTypes.map(type => (
-            <option value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
+            <label class="type-checkbox-label">
+              <input 
+                type="checkbox" 
+                class="type-checkbox" 
+                value={type}
+                checked
+              />
+              <span>{type.charAt(0).toUpperCase() + type.slice(1)}</span>
+            </label>
           ))}
-        </select>
+        </div>
       </div>
       
       <div class="filter-group">
@@ -157,11 +268,11 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
   </div>
   
   <div class="results-info">
-    <span id="resultsCount">{experiences.length}</span> experiences found
+    <span id="resultsCount">{sortedExperiences.length}</span> experiences found
   </div>
   
   <div class="experiences-grid" id="experiencesGrid">
-    {experiences.map(exp => (
+    {sortedExperiences.map(exp => (
       <article 
         class="experience-card" 
         data-id={exp.id}
@@ -170,8 +281,19 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
         data-search-text={`${exp.title} ${exp.organization} ${exp.description} ${exp.tags.join(' ')}`.toLowerCase()}
       >
         <div class="experience-header">
-          <div class="experience-type-badge" data-type={exp.type}>
-            {exp.type}
+          <div class="experience-header-left">
+            <label class="resume-select-checkbox">
+              <input 
+                type="checkbox" 
+                class="resume-select-input" 
+                data-experience-id={exp.id}
+                checked
+              />
+              <span class="checkbox-label">Include in Resume</span>
+            </label>
+            <div class="experience-type-badge" data-type={exp.type}>
+              {exp.type}
+            </div>
           </div>
           <div class="experience-date">
             {exp.startDate} - {exp.endDate}
@@ -188,10 +310,29 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
         
         <p class="experience-description">{exp.description}</p>
         
-        <div class="experience-tags">
-          {exp.tags.map(tag => (
-            <span class="tag">{tag}</span>
-          ))}
+        <div class="experience-footer">
+          <div class="experience-tags">
+            {exp.tags.map(tag => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+          {exp.projectLink && (
+            <a 
+              href={exp.projectLink.startsWith('http') || exp.projectLink.startsWith('/') 
+                ? exp.projectLink 
+                : `/projects#project-${exp.projectLink}`}
+              class="project-link-btn"
+              target={exp.projectLink.startsWith('http') ? '_blank' : undefined}
+              rel={exp.projectLink.startsWith('http') ? 'noopener noreferrer' : undefined}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              View Project
+            </a>
+          )}
         </div>
       </article>
     ))}
@@ -247,13 +388,14 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
   import jsPDF from 'jspdf';
   
   const searchInput = document.getElementById('searchInput') as HTMLInputElement;
-  const typeFilter = document.getElementById('typeFilter') as HTMLSelectElement;
+  const typeCheckboxes = Array.from(document.querySelectorAll('.type-checkbox')) as HTMLInputElement[];
   const tagFilter = document.getElementById('tagFilter') as HTMLSelectElement;
   const resetBtn = document.getElementById('resetFilters') as HTMLButtonElement;
   const experiencesGrid = document.getElementById('experiencesGrid') as HTMLElement;
   const resultsCount = document.getElementById('resultsCount') as HTMLElement;
   const noResults = document.getElementById('noResults') as HTMLElement;
   const cards = Array.from(document.querySelectorAll('.experience-card')) as HTMLElement[];
+  const resumeSelectInputs = Array.from(document.querySelectorAll('.resume-select-input')) as HTMLInputElement[];
   
   const resumePreviewBtn = document.getElementById('resumePreviewBtn') as HTMLButtonElement;
   const pdfModal = document.getElementById('pdfModal') as HTMLElement;
@@ -261,15 +403,34 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
   const downloadPdfBtn = document.getElementById('downloadPdfBtn') as HTMLButtonElement;
   const pdfExperiencesList = document.getElementById('pdfExperiencesList') as HTMLElement;
   
+  function getSelectedTypes(): string[] {
+    return typeCheckboxes
+      .filter(checkbox => checkbox.checked)
+      .map(checkbox => checkbox.value);
+  }
+  
+  function getSelectedExperienceIds(): number[] {
+    return resumeSelectInputs
+      .filter(input => input.checked)
+      .map(input => parseInt(input.dataset.experienceId || '0'));
+  }
+  
   function getVisibleExperiences() {
-    return cards.filter(card => card.style.display !== 'none').map(card => ({
-      title: card.querySelector('.experience-title')?.textContent || '',
-      organization: card.querySelector('.experience-org')?.textContent || '',
-      date: card.querySelector('.experience-date')?.textContent || '',
-      description: card.querySelector('.experience-description')?.textContent || '',
-      type: card.dataset.type || '',
-      tags: (card.dataset.tags || '').split(',')
-    }));
+    const selectedIds = getSelectedExperienceIds();
+    // Cards are already in sorted order (most recent first) from the template
+    return cards
+      .filter(card => {
+        const cardId = parseInt(card.dataset.id || '0');
+        return card.style.display !== 'none' && selectedIds.includes(cardId);
+      })
+      .map(card => ({
+        title: card.querySelector('.experience-title')?.textContent || '',
+        organization: card.querySelector('.experience-org')?.textContent || '',
+        date: card.querySelector('.experience-date')?.textContent || '',
+        description: card.querySelector('.experience-description')?.textContent || '',
+        type: card.dataset.type || '',
+        tags: (card.dataset.tags || '').split(',').filter(tag => tag !== '')
+      }));
   }
   
   function updatePDFPreview() {
@@ -421,7 +582,7 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
   
   function filterExperiences() {
     const searchTerm = searchInput.value.toLowerCase();
-    const selectedType = typeFilter.value;
+    const selectedTypes = getSelectedTypes();
     const selectedTag = tagFilter.value;
     
     let visibleCount = 0;
@@ -432,7 +593,8 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
       const cardTags = (card.dataset.tags || '').split(',');
       
       const matchesSearch = searchText.includes(searchTerm);
-      const matchesType = !selectedType || cardType === selectedType;
+      // Show card if its type is in selected types. If no types selected, show nothing.
+      const matchesType = selectedTypes.length > 0 && selectedTypes.includes(cardType);
       const matchesTag = !selectedTag || cardTags.includes(selectedTag);
       
       if (matchesSearch && matchesType && matchesTag) {
@@ -456,9 +618,13 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
   
   function resetFilters() {
     searchInput.value = '';
-    typeFilter.value = '';
+    typeCheckboxes.forEach(checkbox => checkbox.checked = true);
     tagFilter.value = '';
+    resumeSelectInputs.forEach(input => input.checked = true);
     filterExperiences();
+    if (pdfModal.style.display === 'flex') {
+      updatePDFPreview();
+    }
   }
   
   searchInput.addEventListener('input', () => {
@@ -468,11 +634,13 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
     }
   });
   
-  typeFilter.addEventListener('change', () => {
-    filterExperiences();
-    if (pdfModal.style.display === 'flex') {
-      updatePDFPreview();
-    }
+  typeCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+      filterExperiences();
+      if (pdfModal.style.display === 'flex') {
+        updatePDFPreview();
+      }
+    });
   });
   
   tagFilter.addEventListener('change', () => {
@@ -480,6 +648,14 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
     if (pdfModal.style.display === 'flex') {
       updatePDFPreview();
     }
+  });
+  
+  resumeSelectInputs.forEach(input => {
+    input.addEventListener('change', () => {
+      if (pdfModal.style.display === 'flex') {
+        updatePDFPreview();
+      }
+    });
   });
   
   resetBtn.addEventListener('click', resetFilters);
@@ -542,10 +718,48 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
     gap: var(--spacing-sm);
   }
   
+  .type-filter-group {
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+  }
+  
   .filter-label {
     font-size: 0.9rem;
     color: var(--color-text-secondary);
     font-weight: 500;
+  }
+  
+  .type-checkboxes {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+  
+  .type-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    cursor: pointer;
+    user-select: none;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+  }
+  
+  .type-checkbox-label:hover {
+    background-color: var(--color-surface-elevated);
+  }
+  
+  .type-checkbox {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--color-primary);
+  }
+  
+  .type-checkbox-label span {
+    font-size: 0.9rem;
+    color: var(--color-text-primary);
   }
   
   .filter-select {
@@ -648,8 +862,42 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
   .experience-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: var(--spacing-md);
+    gap: var(--spacing-md);
+  }
+  
+  .experience-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    flex: 1;
+  }
+  
+  .resume-select-checkbox {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    cursor: pointer;
+    user-select: none;
+    padding: var(--spacing-xs) 0;
+  }
+  
+  .resume-select-input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--color-primary);
+  }
+  
+  .checkbox-label {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+  }
+  
+  .resume-select-checkbox:hover .checkbox-label {
+    color: var(--color-primary);
   }
   
   .experience-type-badge {
@@ -659,6 +907,7 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
     padding: 0.25rem 0.75rem;
     border-radius: var(--radius-sm);
     letter-spacing: 0.05em;
+    align-self: flex-start;
   }
   
   .experience-type-badge[data-type="courses"] {
@@ -722,10 +971,22 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
     margin-bottom: var(--spacing-md);
   }
   
+  .experience-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-border);
+  }
+  
   .experience-tags {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-xs);
+    flex: 1;
   }
   
   .tag {
@@ -741,6 +1002,31 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
   .tag:hover {
     border-color: var(--color-primary);
     color: var(--color-primary);
+  }
+  
+  .project-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-md);
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all var(--transition-base);
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  
+  .project-link-btn:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+  }
+  
+  .project-link-btn svg {
+    flex-shrink: 0;
   }
   
   .no-results {
@@ -777,13 +1063,44 @@ const allTypes = [...new Set(experiences.map(exp => exp.type))].sort();
       width: 100%;
     }
     
+    .type-filter-group {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .type-checkboxes {
+      width: 100%;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+    
     .filter-select {
       flex: 1;
+      width: 100%;
     }
     
     .resume-preview-btn,
     .reset-btn {
       margin-left: 0;
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .experience-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .experience-date {
+      align-self: flex-end;
+    }
+    
+    .experience-footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .project-link-btn {
       width: 100%;
       justify-content: center;
     }

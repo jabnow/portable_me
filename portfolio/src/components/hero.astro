@@ -3,20 +3,32 @@
 
 <section class="hero">
   <div class="container">
-    <div class="hero-content">
-      <h1 class="hero-title">
-        <span class="hero-greeting">Hello, I'm</span>
-        <span class="hero-name">Dr. Jane Smith</span>
-      </h1>
-      <p class="hero-subtitle">Assistant Professor of Computer Science</p>
-      <p class="hero-description">
-        I research human-computer interaction, accessible design, and machine learning applications 
-        in educational technology. My work focuses on creating inclusive digital experiences that 
-        empower learners across diverse contexts.
-      </p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">Get in Touch</a>
-        <a href="/resume" class="btn btn-secondary">View Resume</a>
+    <div class="hero-wrapper">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="hero-greeting">Hello, I'm</span>
+          <span class="hero-name">Joy Wang :D</span>
+        </h1>
+        <p class="hero-subtitle">Business Analyst and Software Developer</p>
+        <p class="hero-description">
+          I pitch and develop software solutions to help clients automate and scale their operations.
+          My work also includes themes of creating inclusive digital experiences and systems design in workplace technology.
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Get in Touch</a>
+          <a href="/resume" class="btn btn-secondary">View Resume</a>
+        </div>
+      </div>
+      <div class="hero-profile">
+        <img 
+          src="./src/assets/profile.png" 
+          alt="Dr. Jane Smith" 
+          class="profile-image"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="profile-placeholder" style="display: none;">
+          <span class="profile-initials">JS</span>
+        </div>
       </div>
     </div>
   </div>
@@ -42,31 +54,42 @@
     pointer-events: none;
   }
   
-  .hero-content {
-    max-width: 800px;
+  .hero-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3xl);
+    width: 100%;
     position: relative;
     z-index: 1;
   }
   
+  .hero-content {
+    flex: 1;
+    max-width: 700px;
+  }
+  
   .hero-greeting {
     display: block;
-    font-size: 1.25rem;
+    font-size: 2rem;
     font-weight: 400;
     color: var(--color-text-secondary);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
   }
   
   .hero-name {
     display: block;
+    font-size: 4.5rem;
+    font-weight: 700;
     background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.1;
   }
   
   .hero-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     color: var(--color-text-primary);
     font-weight: 500;
     margin-bottom: var(--spacing-lg);
@@ -77,6 +100,40 @@
     line-height: 1.8;
     margin-bottom: var(--spacing-2xl);
     max-width: 700px;
+  }
+  
+  .hero-profile {
+    flex-shrink: 0;
+    width: 300px;
+    height: 300px;
+    position: relative;
+  }
+  
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--color-primary);
+    box-shadow: 0 20px 60px rgba(96, 165, 250, 0.3);
+  }
+  
+  .profile-placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid var(--color-primary);
+    box-shadow: 0 20px 60px rgba(96, 165, 250, 0.3);
+  }
+  
+  .profile-initials {
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--color-background);
   }
   
   .hero-cta {
@@ -116,13 +173,55 @@
     transform: translateY(-2px);
   }
   
+  @media (max-width: 968px) {
+    .hero-wrapper {
+      flex-direction: column;
+      text-align: center;
+      gap: var(--spacing-2xl);
+    }
+    
+    .hero-profile {
+      width: 250px;
+      height: 250px;
+    }
+    
+    .hero-name {
+      font-size: 3.5rem;
+    }
+    
+    .hero-greeting {
+      font-size: 1.75rem;
+    }
+  }
+  
   @media (max-width: 768px) {
     .hero {
       min-height: 80vh;
     }
     
+    .hero-name {
+      font-size: 2.5rem;
+    }
+    
+    .hero-greeting {
+      font-size: 1.5rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.5rem;
+    }
+    
     .hero-description {
       font-size: 1rem;
+    }
+    
+    .hero-profile {
+      width: 200px;
+      height: 200px;
+    }
+    
+    .profile-initials {
+      font-size: 4rem;
     }
   }
 </style>

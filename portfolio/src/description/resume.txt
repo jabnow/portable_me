@@ -1,1 +1,232 @@
-# template / struct
+# Resume Experiences
+# Format: Each experience is separated by ===
+# Fields: Title, Organization, Location, Start Date, End Date, Type, Tags, Description, Project Link (optional)
+# Types: Analyst, PM, Consultant, All
+# Tags: comma-separated list of skills and keywords
+# Project Link: Optional. Can be:
+#   - A project ID (number) - links to /projects#project-{id}
+#   - A URL (starts with http:// or https://) - opens in new tab
+#   - A relative path (starts with /) - links to that path
+# Note: Experiences are ordered from oldest (lowest number) to newest (highest number)
+# The display order (most recent first) is handled automatically by resume_search.astro
+
+=== Experience 1 ===
+Title: Founder
+Organization: Dabble Youth Art Instruction
+Location: Middlesex, MA
+Start Date: 2019
+End Date: 2022
+Type: PM
+Tags: inclusivity, management, leadership
+Project Link: 7
+Description:
+Provided virtual learning activities and volunteering during COVID-19 shutdown, emphasizing community connections.
+
+=== Experience 2 ===
+Title: Nutrition Services Representative
+Organization: Emerson Hospital
+Location: Middlesex, MA
+Start Date: 2022
+End Date: 2023
+Type: All
+Tags: attention to detail, reporting, teamwork, communication
+Description:
+Liasion between Nutrition Office, Kitchen, department nurses, providing patient meals and care during COVID-19 hospitalization. 
+
+=== Experience 3 ===
+Title: Minor in Mathematics
+Organization: NYU
+Location: NYC, NY
+Start Date: 2023
+End Date: 2024
+Type: All
+Tags: education, coursework
+Description:
+Calculus II, Linear Algebra & Differential Equations, Discrete Mathematics, Applied Statistics & Probability
+
+=== Experience 4 ===
+Title: BSc in Business and Technology Management
+Organization: New York University
+Location: NYC, NY
+Start Date: Sep 2023
+End Date: May 2026
+Type: All
+Tags: education, coursework
+Description:
+Concentration in Innovation & Strategy. Dean's List. Early graduation with honors from Tandon School of Engineering.
+
+=== Experience 5 ===
+Title: Business & Finance Lead Tutor
+Organization: Peer Tutoring Center, NYU
+Location: NYC, NY
+Start Date: Jan 2024
+End Date: May 2025
+Type: Consultant
+Tags: domain expert, problem-solving, finance
+Description:
+Tutored 50+ students in Accounting, Managerial Economics, and Corporate Finance with case exercises.
+
+=== Experience 6 ===
+Title: Data Engineer
+Organization: DTCC: Fintech AI Initiative, NYU
+Location: NYC, NY
+Start Date: Sep 2024
+End Date: May 2025
+Type: Analyst
+Tags: finance, technical, domain expert
+Description:
+Applied machine learning/NLP to model market sentiment and price volatility across financial markets. Co-developed quant dashboards linking liquidity signals to short-term risk spreads with AI-driven credit-risk forecasting.
+
+=== Experience 7 ===
+Title: People Analytics Researcher
+Organization: Industrial/Organizational Psychology Dept, NYU
+Location: NYC, NY
+Start Date: Dec 2024
+End Date: May 2025
+Type: Analyst
+Tags: research, technical, industry
+Description:
+Analyzed LLM-based job-market data sets to quantify human-capital risk and economic mobility trends, increased mastery of new analysis techniques.
+
+=== Experience 8 ===
+Title: Operations Management Intern
+Organization: Amazon
+Location: ACY1, NJ
+Start Date: May 2025
+End Date: Jul 2025
+Type: Consultant
+Tags: problem-solving, technical, leadership, finance
+Description:
+Built real time financial ops dashboard tracking production throughput and downtime; proposed physical prototype projected $500K+ annual savings to site leadership. Conducted 150-200 associate trainings during Prime Week new tech rollout.
+
+=== Experience 9 ===
+Title: Minor in Computer Science
+Organization: NYU
+Location: NYC, NY
+Start Date: 2024
+End Date: 2026
+Type: All
+Tags: education, coursework
+Description:
+Java, DSA (Python), OOP (C++), Databases (SQL), Computer Networking, Graduate Offensive Security.
+
+=== Experience 10 ===
+Title: Cell Biology Academic
+Organization: Science Olympiad, USABO
+Location: MA, USA
+Start Date: 2020
+End Date: 2023
+Type: All
+Tags: attention to detail, domain expert, competition 
+Description:
+5th Nationals and 1st-3rd State Awards in Cell Biology, Genetics, Anat & Phys, Rocks & Minerals, JSHS Presentation
+
+=== Experience 11 ===
+Title: Data Analyst
+Organization: Data Analytics & Visualization Group, NYU
+Location: NYC, NY
+Start Date: Sep 2023
+End Date: Dec 2023
+Type: Analyst
+Tags: technical, attention to detail, reporting
+Description: Google Cloud Beginner Data Analyst Certification, Looker Studio, tax audit
+
+=== Experience 12 ===
+Title: Peer Tutor K-12
+Organization: Acton-Boxborough School District
+Location: Middlesex, MA
+Start Date: 2017
+End Date: 2023
+Type: All
+Tags: coursework, communication
+Description: Tutored Alegra - Calculus II, Biology, Essay Revision, test prep
+
+=== Experience 13 ===
+Title: Resource Center Assistant
+Organization: Residential Life & Housing Services, NYU
+Location: NYC, NY
+Start Date: May 2024
+End Date: May 2025
+Type: All
+Tags: management, teamwork, reporting
+Description: Residential Assistant, inventory audit, plan and budget 50+ events
+
+=== Experience 14 ===
+Title: Student Council
+Organization: Acton-Boxborough School District
+Location: Middlesex, MA
+Start Date: 2019
+End Date: 2023
+Type: All
+Tags: management, leadership, inclusivity
+Description: District student rep, advocated for resources in school improvement plan, established student project grant.
+
+=== Experience 15 ===
+Title: D1 Varsity Tennis Captain
+Organization: Acton-Boxborough School District
+Location: Middlesex, MA
+Start Date: Sep 2022
+End Date: May 2023
+Type: All
+Tags: teamwork, leadership, competition
+Description: USTA MA Top 50 Under 18, MIAA State Champions 2019-2021, Captain 2022-23 
+
+=== Experience 15 ===
+Title: Strategy Consultant
+Organization: Stern Management Consulting Group
+Location: NYC, NY
+Start Date: May 2024
+End Date: May 2026
+Type: Consultant
+Tags: finance, problem-solving, industry
+Description: Due diligence, valuation, mock investor memo to justify Series A target pricing. Built cash-flow, project budget, DCF, LBO, M&A models.
+
+=== Experience 16 ===
+Title: Full Stack Software Developer
+Organization: MLH Hackathons
+Location: Multiple Locations
+Start Date: 2020
+End Date: 2026
+Type: PM
+Tags: technical, competition, domain expert
+Description: Duke-Harvard Live 2nd & Best AI/ML, UMD Technica T.Rowe Price Best Fintech, Columbia DivHacks Best Auth0, etc.
+
+=== Experience 17 ===
+Title: Strategy Lead Eboard
+Organization: TechSHRM NYU Chapter
+Location: NYC, NY
+Start Date: Dec 2024
+End Date: May 2026
+Type: All
+Tags: industry, leadership
+Description: Most Impactful Organization Award 2024-25, host 20+ alumni networking events & recruiting workshops
+
+=== Experience 18 ===
+Title: Logistics Lead Eboard
+Organization: LGBTQ+ Center, NYU
+Location: NYC, NY
+Start Date: Jan 2024
+End Date: May 2026
+Type: PM
+Tags: inclusivity, leadership
+Description: Planned and marketed 20+ discussion forum events for Aces & Aros Organization.
+
+=== Experience 19 ===
+Title: Founder
+Organization: Leslie Entrepreneurship Lab
+Location: NYC, NY
+Start Date: 2024
+End Date: 2026
+Type: All
+Tags: industry, problem-solving, competition
+Description: Developing SaaS Jobtech product GTM strategy, Summer startup Bootcamp, Founders Program, funding and legal advice
+
+=== Experience 20 ===
+Title: Recipient Round I & II
+Organization: NYU Prototyping Fund
+Location: NYC, NY
+Start Date: Feb 2024
+End Date: May 2025
+Type: PM
+Tags: problem-solving, teamwork, competition
+Description: Received up to $500 / round for therapeutic robotics project, agile HCI design, presented at university showcase.  

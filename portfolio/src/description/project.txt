@@ -1,1 +1,130 @@
-# template / struct, update here
+# Research Projects
+# Format: Each project is separated by ===
+# Fields: Title, Description, Image, Year, Status, Tags, Publications, Link
+# Status: ongoing, completed
+# Tags: comma-separated list
+# Publications: number of publications
+# Link: URL to project (use # for placeholder)
+# Note: Projects are ordered from oldest (lowest number) to newest (highest number)
+# The display order (most recent first) is handled automatically by projects_gallery.astro
+# Future: Support for hero image, carousel, video, gif (coming soon)
+
+=== Project 1 ===
+Title: IAM Webapp Prototype
+Description: An innovative small-brand and startup-focused Influencer Analytics & Marketing platform for my NYU Entrepreneurship course semester project.
+Image: /placeholder.svg?height=400&width=600
+Year: 2025
+Status: ongoing
+Tags: 
+Publications: 3
+Link: #
+
+=== Project 2 ===
+Title: People Analytics Job Knowledge Classification
+Description: Develop an evolving ontology from ONET job ad metadata and visualizations
+Image: /placeholder.svg?height=400&width=600
+Year: 2024
+Status: completed
+Tags: 
+Publications: 2
+Link: #
+
+=== Project 3 ===
+Title: Financial Templates
+Description: For valuation, accounting, resource planning, and management purposes
+Image: /placeholder.svg?height=400&width=600
+Year: 2023
+Status: completed
+Tags: 
+Publications: 5
+Link: #
+
+=== Project 4 ===
+Title: Amazon PCF & Quality Assurance Whitepaper
+Description: Understand that I had to censor internal metrics. Also, they took my presentation as future  intern training material :(
+Image: /placeholder.svg?height=400&width=600
+Year: 2025
+Status: completed
+Tags: 
+Publications: 2
+Link: #
+
+=== Project 5 ===
+Title: Sentiment Analysis Investing Platform
+Description: Intelligent tutoring system that adapts to student needs and provides personalized feedback in real-time.
+Image: /placeholder.svg?height=400&width=600
+Year: 2024
+Status: completed
+Tags: AI, Education, Machine Learning
+Publications: 3
+Link: #
+
+=== Project 6 ===
+Title: My N8N Workflows
+Description: General workflow automation, research Algo trading, and marketing purposes.
+Image: /placeholder.svg?height=400&width=600
+Year: 2024
+Status: completed
+Tags: 
+Publications: 3
+Link: #
+
+=== Project 7 ===
+Title: PCOS Early Detection
+Description: ML project, NYU Data Science Bootcamp
+Image: /placeholder.svg?height=400&width=600
+Year: 2023
+Status: completed
+Tags: 
+Publications: 1
+Link: #
+
+=== Project 8 ===
+Title: PF Budgeting App MVP
+Description: React Native, Tesseract, MERN server setup with analytics and forecasting 
+Image: /placeholder.svg?height=400&width=600
+Year: 2024
+Status: completed
+Tags: 
+Publications: 1
+Link: #
+
+=== Project 9 ===
+Title: Project PI Prototype
+Description: Jobtech SaaS extending professional mentorship to mid-career changes
+Image: /placeholder.svg?height=400&width=600
+Year: 2024
+Status: ongoing
+Tags: 
+Publications: 2
+Link: #
+
+=== Project 10 ===
+Title: ChatNotes LLM
+Description: I have this interesting prof who makes 200+ slide ppts per class and secretly uses AI to track individual participation. I trained my own model to maintain sanity. 
+Image: /placeholder.svg?height=400&width=600
+Year: 2025
+Status: completed
+Tags: 
+Publications: 1
+Link: #
+
+=== Project 11 ===
+Title: Excel Hell
+Description: I've created a series of gamified excel challenges to wean you off the ol' "drag and drop" and teach essential shortcuts.
+Image: /placeholder.svg?height=400&width=600
+Year: 2023
+Status: ongoing
+Tags: 
+Publications: 1
+Link: #
+
+=== Project 12 ===
+Title: PrioriKitty MVP
+Description: An inter-platform pet manages each tab it touches. Stay on task and earn treats to feed it, built for ADHD challenges.
+Image: /placeholder.svg?height=400&width=600
+Year: 2025
+Status: completed
+Tags: 
+Publications: 1
+Link: #

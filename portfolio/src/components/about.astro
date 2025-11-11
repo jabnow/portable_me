@@ -7,44 +7,35 @@
     <div class="about-content">
       <div class="about-text">
         <p class="about-paragraph">
-          I'm an Assistant Professor in the Department of Computer Science at University Name, 
-          where I lead the Human-Centered Computing Lab. My research sits at the intersection of 
-          human-computer interaction, accessibility, and machine learning.
+          I'm currently a senior at New York University, Tandon SoE, majoring in Business and Technology Management
+          and minors in Computer Science, Applied Math. Focus in information systemes, operations, and strategic innovation. 
+          Currently job searching in technology sectors. 
         </p>
         <p class="about-paragraph">
-          Before joining University Name, I completed my Ph.D. at MIT, where I was advised by 
-          Professor John Doe. My dissertation focused on developing adaptive learning systems 
-          that personalize educational content based on individual learning patterns and accessibility needs.
+          I'm involved in HR, product management, and management consulting clubs on campus. 
+          I also enjoy competing in hackathons in my free time and working at the Leslie Entrepreneurship Lab on GTM strategy for my SaaS MVP.
+          I frequently apply new tools develop adaptive learning systems, jobtech, prroductivity, and financial planning solutions.
         </p>
         <p class="about-paragraph">
-          I'm passionate about creating technology that empowers all learners, regardless of their 
-          abilities or backgrounds. My work has been published in top-tier venues including CHI, 
-          UIST, and ASSETS, and has been recognized with several awards including the Best Paper 
-          Award at CHI 2023.
+          In the upcoming year, I am looking forward to taking on pitch competitons and working on my first economic research whitepaper.
+          Within the next 12 months, I expect to have established a business venture and all regular marketing activities.
+          I am also preparing for deferred MBA programs.
         </p>
         
         <div class="about-stats">
           <div class="stat">
-            <div class="stat-number">25+</div>
-            <div class="stat-label">Publications</div>
+            <div class="stat-number">5+</div>
+            <div class="stat-label">CS Competition wins</div>
           </div>
           <div class="stat">
-            <div class="stat-number">5</div>
-            <div class="stat-label">Awards</div>
+            <div class="stat-number">12</div>
+            <div class="stat-label">Academic Awards</div>
           </div>
           <div class="stat">
-            <div class="stat-number">10+</div>
-            <div class="stat-label">PhD Students</div>
+            <div class="stat-number">10</div>
+            <div class="stat-label">AP transfer credits</div>
           </div>
         </div>
-      </div>
-      
-      <div class="about-image">
-        <img 
-          src="/placeholder.svg?height=500&width=400" 
-          alt="Profile photo"
-          class="profile-image"
-        />
       </div>
     </div>
   </div>
@@ -62,17 +53,18 @@
   
   .about-content {
     display: flex;
-    gap: var(--spacing-3xl);
-    align-items: center;
+    justify-content: center;
   }
   
   .about-text {
-    flex: 1;
+    max-width: 800px;
+    text-align: center;
   }
   
   .about-paragraph {
     margin-bottom: var(--spacing-lg);
     font-size: 1.05rem;
+    text-align: center;
   }
   
   .about-stats {
@@ -82,6 +74,9 @@
     margin-top: var(--spacing-2xl);
     padding-top: var(--spacing-2xl);
     border-top: 1px solid var(--color-border);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .stat {
@@ -100,29 +95,17 @@
     font-size: 0.95rem;
   }
   
-  .about-image {
-    flex: 0 0 350px;
-  }
-  
-  .profile-image {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-  }
-  
   @media (max-width: 968px) {
-    .about-content {
-      flex-direction: column-reverse;
-    }
-    
-    .about-image {
-      flex: 0 0 auto;
-      max-width: 300px;
-    }
-    
     .about-stats {
       grid-template-columns: repeat(3, 1fr);
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .about-stats {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
     }
   }
 </style>
