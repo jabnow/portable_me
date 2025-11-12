@@ -46,7 +46,8 @@
         </div>
       </div>
       
-      <form class="contact-form">
+      <!-- contact form -->
+      <form class="contact-form" id="contact-form">
         <div class="form-group">
           <label for="name" class="form-label">Name</label>
           <input type="text" id="name" name="name" class="form-input" required />
@@ -72,6 +73,47 @@
     </div>
   </div>
 </section>
+
+<!-- ✅ EmailJS Integration -->
+<script is:inline src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script is:inline>
+  (function () {
+    emailjs.init({ publicKey: 'MeBKZHszt2pZ82YOk' }); // <-- Replace with your public key
+
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    const btn = form.querySelector('button[type="submit"]');
+    const originalText = btn.textContent;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const templateParams = {
+        name: form.name.value,
+        email: form.email.value,
+        subject: form.subject.value,
+        message: form.message.value,
+        time: new Date().toLocaleString(), // ✅ add timestamp
+      };
+
+      try {
+        await emailjs.send('portfolio_email', 'template_k7tg3ad', templateParams);
+        alert('✅ Message sent! Thank you for reaching out.');
+        form.reset();
+      } catch (err) {
+        console.error(err);
+        alert('❌ Failed to send. Please try again.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    });
+  })();
+</script>
 
 <style>
   .contact {
