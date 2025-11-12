@@ -12,7 +12,7 @@
 === Project 1 ===
 Title: IAM Webapp Prototype
 Description: An innovative small-brand and startup-focused Influencer Analytics & Marketing platform for my NYU Entrepreneurship course semester project.
-Image: src/assets/dash.png?height=400&width=600
+Image: /assets/dash.png?height=400&width=600
 Year: 2025
 Status: ongoing
 Tags: 
@@ -22,7 +22,7 @@ Link: #
 === Project 2 ===
 Title: People Analytics Job Knowledge Classification
 Description: Develop an evolving ontology from ONET job ad metadata and visualizations
-Image: src/assets/vector.png?height=400&width=600
+Image: /assets/vector.png?height=400&width=600
 Year: 2024
 Status: completed
 Tags: 
@@ -32,7 +32,7 @@ Link: #
 === Project 3 ===
 Title: Financial Templates
 Description: For valuation, accounting, resource planning, and management purposes
-Image: src/assets/template.png?height=400&width=600
+Image: /assets/template.png?height=400&width=600
 Year: 2023
 Status: ongoing
 Tags: 
@@ -42,7 +42,7 @@ Link: #
 === Project 4 ===
 Title: Amazon PCF & Quality Assurance Whitepaper
 Description: Understand that I had to censor internal metrics. Also, they took my presentation as future  intern training material :(
-Image: src/assets/amzn.jpg?height=400&width=600
+Image: /assets/amzn.jpg?height=400&width=600
 Year: 2025
 Status: completed
 Tags: 
@@ -52,7 +52,7 @@ Link: #
 === Project 5 ===
 Title: Sentiment Analysis Investing Platform
 Description: Intelligent tutoring system that adapts to student needs and provides personalized feedback in real-time.
-Image: src/assets/stock_dash.png?height=400&width=600
+Image: /assets/stock_dash.png?height=400&width=600
 Year: 2024
 Status: completed
 Tags: AI, Education, Machine Learning
@@ -62,7 +62,7 @@ Link: #
 === Project 6 ===
 Title: My N8N Workflows
 Description: General workflow automation, research Algo trading, and marketing purposes.
-Image: src/assets/nyu_proto.png?height=400&width=600
+Image: /assets/nyu_proto.png?height=400&width=600
 Year: 2024
 Status: completed
 Tags: 
@@ -72,7 +72,7 @@ Link: #
 === Project 7 ===
 Title: PCOS Early Detection
 Description: ML project, NYU Data Science Bootcamp
-Image: src/assets/pcos.png?height=400&width=600
+Image: /assets/pcos.png?height=400&width=600
 Year: 2023
 Status: completed
 Tags: 
@@ -82,7 +82,7 @@ Link: #
 === Project 8 ===
 Title: PF Budgeting App MVP
 Description: React Native, Tesseract, MERN server setup with analytics and forecasting 
-Image: src/assets/receipt.png?height=400&width=600
+Image: /assets/receipt.png?height=400&width=600
 Year: 2024
 Status: completed
 Tags: 
@@ -92,7 +92,7 @@ Link: #
 === Project 9 ===
 Title: Project PI Prototype
 Description: Jobtech SaaS extending professional mentorship to mid-career changes
-Image: src/assets/PIE.gif?height=400&width=600
+Image: /assets/PIE.gif?height=400&width=600
 Year: 2024
 Status: ongoing
 Tags: 
@@ -102,7 +102,7 @@ Link: #
 === Project 10 ===
 Title: ChatNotes LLM
 Description: I have this interesting prof who makes 200+ slide ppts per class and secretly uses AI to track individual participation. I trained my own model to maintain sanity. 
-Image: src/assets/4004.png?height=400&width=600
+Image: /assets/4004.png?height=400&width=600
 Year: 2025
 Status: completed
 Tags: 
@@ -112,7 +112,7 @@ Link: #
 === Project 11 ===
 Title: Excel Hell
 Description: I've created a series of gamified excel challenges to wean you off the ol' "drag and drop" and teach essential shortcuts.
-Image: src/assets/excel_hell.png?height=400&width=600
+Image: /assets/excel_hell.png?height=400&width=600
 Year: 2023
 Status: ongoing
 Tags: 
@@ -122,7 +122,7 @@ Link: #
 === Project 12 ===
 Title: PrioriKitty MVP
 Description: An inter-platform pet manages each tab it touches. Stay on task and earn treats to feed it, built for ADHD challenges.
-Image: src/assets/kitty.png?height=400&width=600
+Image: /assets/kitty.png?height=400&width=600
 Year: 2025
 Status: completed
 Tags: 
